@@ -1,4 +1,3 @@
--- Keymaps
 vim.g.mapleader = ' '
 
 vim.keymap.set('i', 'jk', '<esc>')
@@ -20,69 +19,9 @@ vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
--- Editor settings
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.cursorline = true
-vim.o.signcolumn = 'yes'
-vim.o.colorcolumn = '80'
-vim.o.termguicolors = true
-vim.o.wrap = false
-vim.o.hlsearch = false
-vim.o.scrolloff = 8
-vim.o.tabstop = 4
-vim.o.expandtab = true
-vim.o.shiftwidth = 4
-vim.o.shiftround = true
+require('settings')
+require('plugins')
 
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
-        lazypath
-    })
-end
-
-vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup({
-    {
-        'folke/tokyonight.nvim',
-        lazy = false,
-        priority = 1000,
-        opts = {}
-    },
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        config = function()
-            local configs = require('nvim-treesitter.configs')
-
-            configs.setup({
-                ensure_installed = { 'c', 'cpp' },
-                sync_install = false,
-                highlight = { enable = true }
-            })
-        end
-    },
-    {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
-    'neovim/nvim-lspconfig',
-    'hrsh7th/nvim-cmp',
-    'hrsh7th/cmp-nvim-lsp',
-    'saadparwaiz1/cmp_luasnip',
-    'L3MON4D3/LuaSnip'
-})
-
--- Plugins keymaps
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
@@ -93,10 +32,6 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 
--- Plugins editor settings
-vim.cmd.colorscheme('tokyonight')
-
--- Plugins config
 local actions = require('telescope.actions')
 
 require('telescope').setup{
@@ -167,3 +102,5 @@ cmp.setup {
         { name = 'luasnip' }
     }
 }
+
+vim.cmd.colorscheme('tokyonight')
