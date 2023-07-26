@@ -59,7 +59,7 @@ require('telescope').setup{
     }
 }
 
-require('lspconfig')['clangd'].setup {
+require('lspconfig').clangd.setup {
     cmd = { 'clangd', '--header-insertion=never' },
     capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
@@ -70,10 +70,8 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
--- luasnip setup
 local luasnip = require 'luasnip'
 
--- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
     snippet = {
@@ -82,9 +80,8 @@ cmp.setup {
         end
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-        -- C-b (back) C-f (forward) for snippet placeholder navigation.
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
         --['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
