@@ -42,7 +42,7 @@ require('lazy').setup({
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = function() 
+        config = function()
             local configs = require('nvim-treesitter.configs')
 
             configs.setup({
@@ -55,7 +55,12 @@ require('lazy').setup({
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }
-    }
+    },
+    'neovim/nvim-lspconfig',
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'saadparwaiz1/cmp_luasnip',
+    'L3MON4D3/LuaSnip'
 })
 
 vim.cmd.colorscheme('tokyonight')
