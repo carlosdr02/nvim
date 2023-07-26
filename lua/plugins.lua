@@ -44,6 +44,19 @@ require('lazy').setup({
             require('lualine').setup()
         end
     },
+    {
+        'nvim-tree/nvim-tree.lua',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('nvim-tree').setup({
+                actions = {
+                    open_file = {
+                        quit_on_open = true
+                    }
+                }
+            })
+        end
+    },
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',

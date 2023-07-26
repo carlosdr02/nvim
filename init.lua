@@ -28,6 +28,8 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+vim.keymap.set('n', '<leader>e', function() require('nvim-tree.api').tree.toggle({ find_file = true }) end)
+
 --vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
@@ -52,25 +54,17 @@ require('telescope').setup{
     }
 }
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local lspconfig = require('lspconfig')
-
-lspconfig['clangd'].setup {
+require('lspconfig')['clangd'].setup {
     cmd = { 'clangd', '--header-insertion=never' },
-    capabilities = capabilities
+    capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
-
--- luasnip setup
-local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body)
+            require('luasnip').lsp_expand(args.body)
         end
     },
     mapping = cmp.mapping.preset.insert({
