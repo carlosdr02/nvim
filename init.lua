@@ -91,6 +91,10 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+--vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
+
 -- Plugins config
 local actions = require('telescope.actions')
 
