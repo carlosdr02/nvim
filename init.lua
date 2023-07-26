@@ -30,6 +30,11 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 vim.keymap.set('n', '<leader>e', function() require('nvim-tree.api').tree.toggle({ find_file = true }) end)
 
+vim.keymap.set('n', '<tab>', '<Cmd>BufferNext<CR>')
+vim.keymap.set('n', '<s-tab>', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set('n', '<leader>q', '<Cmd>BufferClose<CR>')
+vim.keymap.set('n', '<leader>o', '<Cmd>BufferCloseAllButCurrent<CR>')
+
 --vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
