@@ -19,12 +19,12 @@ vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
---vim.keymap.set('n', '<A-j>', ':m .+1<CR>==')
---vim.keymap.set('n', '<A-k>', ':m .-2<CR>==')
-vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
-vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
-vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv')
-vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv')
+--vim.keymap.set('n', '<a-j>', ':m .+1<cr>==')
+--vim.keymap.set('n', '<a-k>', ':m .-2<cr>==')
+vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi')
+vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi')
+vim.keymap.set('v', 'J', ':m \'>+1<cr>gv=gv')
+vim.keymap.set('v', 'K', ':m \'<-2<cr>gv=gv')
 
 require('settings')
 require('plugins')
@@ -37,10 +37,10 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 vim.keymap.set('n', '<leader>e', function() require('nvim-tree.api').tree.toggle({ find_file = true }) end)
 
-vim.keymap.set('n', '<tab>', '<Cmd>BufferNext<CR>')
-vim.keymap.set('n', '<s-tab>', '<Cmd>BufferPrevious<CR>')
-vim.keymap.set('n', '<leader>q', '<Cmd>BufferClose<CR>')
-vim.keymap.set('n', '<leader>o', '<Cmd>BufferCloseAllButCurrent<CR>')
+vim.keymap.set('n', '<tab>', '<cmd>BufferNext<cr>')
+vim.keymap.set('n', '<s-tab>', '<cmd>BufferPrevious<cr>')
+vim.keymap.set('n', '<leader>q', '<cmd>BufferClose<cr>')
+vim.keymap.set('n', '<leader>o', '<cmd>BufferCloseAllButCurrent<cr>')
 
 --vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
@@ -87,14 +87,14 @@ cmp.setup {
         end
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        --['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
+        ['<c-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<c-d>'] = cmp.mapping.scroll_docs(4),
+        --['<c-space>'] = cmp.mapping.complete(),
+        ['<cr>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
@@ -105,7 +105,7 @@ cmp.setup {
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['<s-tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.locally_jumpable(-1) then
