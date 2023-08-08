@@ -42,7 +42,7 @@ vim.keymap.set('n', '<s-tab>', '<cmd>BufferPrevious<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>BufferClose<cr>')
 vim.keymap.set('n', '<leader>o', '<cmd>BufferCloseAllButCurrent<cr>')
 
-vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 
