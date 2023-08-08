@@ -78,7 +78,10 @@ require('telescope').setup{
                 ['kj'] = actions.close,
                 ['kJ'] = actions.close,
                 ['Kj'] = actions.close,
-                ['KJ'] = actions.close
+                ['KJ'] = actions.close,
+
+                ['<tab>'] = actions.move_selection_previous,
+                ['<s-tab>'] = actions.move_selection_next
             }
         }
     }
