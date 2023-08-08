@@ -35,16 +35,34 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-vim.keymap.set('n', '<leader>e', function() require('nvim-tree.api').tree.toggle({ find_file = true }) end)
+vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFindFileToggle<cr>')
 
 vim.keymap.set('n', '<tab>', '<cmd>BufferNext<cr>')
 vim.keymap.set('n', '<s-tab>', '<cmd>BufferPrevious<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>BufferClose<cr>')
 vim.keymap.set('n', '<leader>o', '<cmd>BufferCloseAllButCurrent<cr>')
 
---vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        -- Buffer local mappings.
+        local opts = { buffer = ev.buf }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
+    end
+})
 
 local actions = require('telescope.actions')
 
