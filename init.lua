@@ -59,7 +59,7 @@ vim.keymap.set('n', '<m-9>', function() ui.nav_file(9) end)
 vim.keymap.set('n', '<m-0>', function() ui.nav_file(10) end)
 --]]
 
-vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 
