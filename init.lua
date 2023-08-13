@@ -35,6 +35,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
 
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFindFileToggle<cr>')
 
@@ -79,6 +80,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
+        vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, opts)
     end
 })
 
