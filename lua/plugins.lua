@@ -54,14 +54,10 @@ require('lazy').setup({
         }
     },
     {
-        'romgrk/barbar.nvim',
-        dependencies = {
-            'lewis6991/gitsigns.nvim',
-            'nvim-tree/nvim-web-devicons'
-        },
-        init = function() vim.g.barbar_auto_setup = false end,
-        opts = {},
-        version = '^1.0.0'
+        'akinsho/bufferline.nvim',
+        version = '*',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        opts = {}
     },
     {
         'nvim-lua/plenary.nvim',

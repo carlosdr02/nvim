@@ -19,12 +19,13 @@ vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
-vim.keymap.set('n', '<a-j>', ':m .+1<cr>==')
-vim.keymap.set('n', '<a-k>', ':m .-2<cr>==')
-vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi')
-vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi')
-vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv')
-vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv')
+local silent = { silent = true }
+vim.keymap.set('n', '<a-j>', ':m .+1<cr>==', silent)
+vim.keymap.set('n', '<a-k>', ':m .-2<cr>==', silent)
+vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi', silent)
+vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', silent)
+vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', silent)
+vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', silent)
 
 require('settings')
 require('plugins')
@@ -37,10 +38,10 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFindFileToggle<cr>')
 
-vim.keymap.set('n', '<tab>', '<cmd>BufferNext<cr>')
-vim.keymap.set('n', '<s-tab>', '<cmd>BufferPrevious<cr>')
-vim.keymap.set('n', '<leader>q', '<cmd>BufferClose<cr>')
-vim.keymap.set('n', '<leader>o', '<cmd>BufferCloseAllButCurrent<cr>')
+vim.keymap.set('n', '<tab>', '<cmd>BufferLineCycleNext<cr>')
+vim.keymap.set('n', '<s-tab>', '<cmd>BufferLineCyclePrev<cr>')
+vim.keymap.set('n', '<leader>q', '<cmd>bd!<cr>')
+vim.keymap.set('n', '<leader>o', '<cmd>BufferLineCloseOthers<cr>')
 
 --[[
 local mark = require('harpoon.mark')
