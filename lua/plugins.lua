@@ -63,6 +63,7 @@ require('lazy').setup({
         'nvim-lua/plenary.nvim',
         'theprimeagen/harpoon'
     },
+    'tpope/vim-fugitive',
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
