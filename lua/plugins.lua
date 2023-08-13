@@ -60,8 +60,8 @@ require('lazy').setup({
         opts = {}
     },
     {
-        'nvim-lua/plenary.nvim',
-        'theprimeagen/harpoon'
+        'theprimeagen/harpoon',
+        dependencies = 'nvim-lua/plenary.nvim'
     },
     'tpope/vim-fugitive',
     'neovim/nvim-lspconfig',
