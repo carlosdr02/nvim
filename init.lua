@@ -1,4 +1,102 @@
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.cursorline = true
+vim.o.signcolumn = 'yes'
+vim.o.colorcolumn = '80'
+vim.o.termguicolors = true
+vim.o.wrap = false
+vim.o.hlsearch = false
+vim.o.scrolloff = 8
+vim.o.tabstop = 4
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.shiftround = true
+vim.o.showmode = false
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ' '
+
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable',
+        lazypath
+    })
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+    {
+        'folke/tokyonight.nvim',
+        lazy = false,
+        priority = 1000,
+        opts = {}
+    },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+        config = function()
+            local configs = require('nvim-treesitter.configs')
+
+            configs.setup({
+                ensure_installed = { 'c', 'cpp' },
+                sync_install = false,
+                highlight = { enable = true }
+            })
+        end
+    },
+    {
+        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        opts = {}
+    },
+    {
+        'nvim-tree/nvim-tree.lua',
+        version = '*',
+        lazy = false,
+        dependencies = {
+            'nvim-tree/nvim-web-devicons'
+        },
+        config = function()
+            require('nvim-tree').setup {
+                actions = {
+                    open_file = {
+                        quit_on_open = true
+                    }
+                }
+            }
+        end
+    },
+    {
+        'akinsho/bufferline.nvim',
+        version = '*',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        opts = {}
+    },
+    {
+        'theprimeagen/harpoon',
+        dependencies = 'nvim-lua/plenary.nvim'
+    },
+    'tpope/vim-fugitive',
+    'neovim/nvim-lspconfig',
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'saadparwaiz1/cmp_luasnip',
+    'l3mon4d3/luasnip'
+})
+
+vim.cmd.colorscheme('tokyonight')
 
 vim.keymap.set('i', 'jk', '<esc>')
 vim.keymap.set('i', 'jK', '<esc>')
@@ -26,9 +124,6 @@ vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi', silent)
 vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', silent)
 vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', silent)
 vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', silent)
-
-require('settings')
-require('plugins')
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -143,5 +238,3 @@ cmp.setup {
         { name = 'luasnip' }
     }
 }
-
-vim.cmd.colorscheme('tokyonight')
