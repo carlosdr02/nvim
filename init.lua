@@ -12,6 +12,7 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.shiftround = true
 vim.o.showmode = false
+vim.o.clipboard = 'unnamedplus'
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -42,7 +43,7 @@ require('lazy').setup({
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = function()
+        config = function () 
             local configs = require('nvim-treesitter.configs')
 
             configs.setup({
@@ -53,7 +54,7 @@ require('lazy').setup({
         end
     },
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -81,19 +82,25 @@ require('lazy').setup({
     {
         'akinsho/bufferline.nvim',
         version = '*',
-        dependencies = 'nvim-tree/nvim-web-devicons',
-        opts = {}
+        dependencies = 'nvim-tree/nvim-web-devicons'
     },
-    {
-        'theprimeagen/harpoon',
-        dependencies = 'nvim-lua/plenary.nvim'
-    },
-    'tpope/vim-fugitive',
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
-    'l3mon4d3/luasnip'
+    'L3MON4D3/LuaSnip',
+    {
+        'ray-x/lsp_signature.nvim',
+        event = 'VeryLazy',
+        opts = {},
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        config = true
+    },
+    'tpope/vim-fugitive'
 })
 
 vim.cmd.colorscheme('tokyonight')
@@ -143,11 +150,8 @@ vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
-        -- Buffer local mappings.
         local opts = { buffer = ev.buf }
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -157,8 +161,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-        vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
-    end
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    end,
 })
 
 local actions = require('telescope.actions')
@@ -189,12 +193,6 @@ require('lspconfig').clangd.setup {
     capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
 
-local has_words_before = function()
-    unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
 local luasnip = require 'luasnip'
 
 local cmp = require 'cmp'
@@ -207,7 +205,6 @@ cmp.setup {
     mapping = cmp.mapping.preset.insert({
         ['<c-u>'] = cmp.mapping.scroll_docs(-4),
         ['<c-d>'] = cmp.mapping.scroll_docs(4),
-        --['<c-space>'] = cmp.mapping.complete(),
         ['<cr>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
@@ -217,8 +214,6 @@ cmp.setup {
                 cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
-            elseif has_words_before() then
-                cmp.complete()
             else
                 fallback()
             end
@@ -238,3 +233,6 @@ cmp.setup {
         { name = 'luasnip' }
     }
 }
+
+require('bufferline').setup()
+require('lsp_signature').setup()
