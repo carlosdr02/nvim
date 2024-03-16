@@ -43,7 +43,7 @@ require('lazy').setup({
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = function () 
+        config = function ()
             local configs = require('nvim-treesitter.configs')
 
             configs.setup({
@@ -90,17 +90,17 @@ require('lazy').setup({
     'saadparwaiz1/cmp_luasnip',
     'L3MON4D3/LuaSnip',
     {
-        'ray-x/lsp_signature.nvim',
-        event = 'VeryLazy',
-        opts = {},
-        config = function(_, opts) require'lsp_signature'.setup(opts) end
-    },
-    {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
         config = true
     },
-    'tpope/vim-fugitive'
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            scope = { enabled = false }
+        }
+    }
 })
 
 vim.cmd.colorscheme('tokyonight')
@@ -162,6 +162,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+        vim.keymap.set('n', '<leader>s', '<cmd>ClangdSwitchSourceHeader<cr>', opts)
     end,
 })
 
@@ -235,4 +237,3 @@ cmp.setup {
 }
 
 require('bufferline').setup()
-require('lsp_signature').setup()
