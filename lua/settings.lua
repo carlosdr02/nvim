@@ -1,0 +1,19 @@
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.cursorline = true
+vim.o.signcolumn = 'yes'
+vim.o.colorcolumn = '80'
+vim.o.termguicolors = true
+vim.o.wrap = false
+vim.o.hlsearch = false
+vim.o.scrolloff = 8
+vim.o.tabstop = 4
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.shiftround = true
+vim.o.showmode = false
+vim.o.clipboard = 'unnamedplus'
+
+vim.g.mapleader = ' '
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
