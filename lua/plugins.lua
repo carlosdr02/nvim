@@ -69,8 +69,10 @@ require('nvim-treesitter.configs').setup({
         'cpp', 'javascript', 'typescript'
     },
     sync_install = false,
-    highlight = { enable = true },
-    indent = { enable = true }
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
+    }
 })
 
 require('nvim-tree').setup {
@@ -117,7 +119,7 @@ require'lspconfig'.lua_ls.setup {
                 checkThirdParty = false,
                 library = {
                     vim.env.VIMRUNTIME,
-                    "${3rd}/luv/library"
+                    '${3rd}/luv/library'
                 }
             }
         })
