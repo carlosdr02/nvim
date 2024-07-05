@@ -32,11 +32,11 @@ vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', silent)
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files)
-vim.keymap.set('n', '<leader>fg', builtin.git_files)
 vim.keymap.set('n', '<leader>fl', builtin.live_grep)
-vim.keymap.set('n', '<leader>fw', builtin.grep_string)
 vim.keymap.set('n', '<leader>fb', builtin.buffers)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags)
+vim.keymap.set('n', '<leader>fg', builtin.git_files)
+vim.keymap.set('n', '<leader>fw', builtin.grep_string)
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics)
 
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFindFileToggle<cr>')
@@ -64,7 +64,7 @@ vim.keymap.set('n', '<a-9>', function() ui.nav_file(9) end)
 
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>j', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
