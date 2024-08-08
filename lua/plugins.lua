@@ -97,7 +97,7 @@ lspconfig.clangd.setup {
     end
 }
 
-local servers = { 'tsserver', 'eslint' }
+local servers = { 'tsserver', 'eslint', 'pyright' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities
