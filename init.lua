@@ -56,57 +56,30 @@ require('lazy').setup({
     -- Telescope
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        -- or                              , branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim' }
+        dependencies = 'nvim-lua/plenary.nvim'
     },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
 
     -- Lualine
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
-    },
+    { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
 
     -- Bufferline
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
 
     -- Autopairs
-    {
-        'windwp/nvim-autopairs',
-        event = "InsertEnter",
-        config = true
-    },
+    { 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
 
     -- Nvim-tree
     {
-        'nvim-tree/nvim-tree.lua',
-        version = '*',
-        lazy = false,
-        dependencies = {
-            'nvim-tree/nvim-web-devicons'
-        },
-        config = function()
-            require('nvim-tree').setup {
-                actions = {
-                    open_file = {
-                        quit_on_open = true
-                    }
-                }
-            }
-        end
+        'nvim-tree/nvim-tree.lua', version = '*',
+        lazy = false, dependencies = 'nvim-tree/nvim-web-devicons'
     },
 
     -- Harpoon
-    {
-        'theprimeagen/harpoon',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
+    { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
     -- Tmux
-    {
-        "aserowy/tmux.nvim",
-        config = function() return require("tmux").setup() end
-    }
+    'aserowy/tmux.nvim'
 })
 
 vim.cmd.colorscheme('kanagawa')
@@ -177,8 +150,8 @@ cmp.setup {
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 cmp.event:on(
-'confirm_done',
-cmp_autopairs.on_confirm_done()
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
 )
 
 require'nvim-treesitter.configs'.setup {
@@ -217,8 +190,17 @@ telescope.setup {
 
 telescope.load_extension('fzf')
 
+require('nvim-tree').setup {
+    actions = {
+        open_file = {
+            quit_on_open = true
+        }
+    }
+}
+
 require('lualine').setup()
 require('bufferline').setup()
+require('tmux').setup()
 
 -- Keymaps
 vim.keymap.set('i', 'jk', '<esc>')
