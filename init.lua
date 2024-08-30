@@ -58,7 +58,6 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = 'nvim-lua/plenary.nvim'
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
 
     -- Lualine
     { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
@@ -96,11 +95,6 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities,
     }
 end
-
-lspconfig.clangd.setup {
-    capabilities = capabilities,
-    cmd = { 'clangd', '--header-insertion=never' }
-}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -155,7 +149,7 @@ cmp.event:on(
 )
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript' },
+    ensure_installed = { 'javascript', 'typescript' },
     sync_install = false,
 
     highlight = {
@@ -187,8 +181,6 @@ telescope.setup {
         }
     }
 }
-
-telescope.load_extension('fzf')
 
 require('nvim-tree').setup {
     actions = {
