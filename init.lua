@@ -81,6 +81,11 @@ require('lazy').setup({
     'aserowy/tmux.nvim'
 })
 
+require('kanagawa').setup({
+    commentStyle = { italic = false },
+    keywordStyle = { italic = false }
+})
+
 vim.cmd.colorscheme('kanagawa')
 
 -- Add additional capabilities supported by nvim-cmp
