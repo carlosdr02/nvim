@@ -78,6 +78,11 @@ require('lazy').setup({
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' }
 })
 
+require('kanagawa').setup({
+    commentStyle = { italic = false },
+    keywordStyle = { italic = false }
+})
+
 vim.cmd.colorscheme('kanagawa')
 
 -- Add additional capabilities supported by nvim-cmp
