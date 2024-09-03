@@ -84,7 +84,8 @@ require('lazy').setup({
 
 require('kanagawa').setup({
     commentStyle = { italic = false },
-    keywordStyle = { italic = false }
+    keywordStyle = { italic = false },
+    statementStyle = { bold = false }
 })
 
 vim.cmd.colorscheme('kanagawa')
