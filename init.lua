@@ -85,13 +85,10 @@ require('lazy').setup({
 require('kanagawa').setup({
     commentStyle = { italic = false },
     keywordStyle = { italic = false },
-    statementStyle = { bold = false },
-    transparent = true
+    statementStyle = { bold = false }
 })
 
 vim.cmd.colorscheme('kanagawa')
-
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = 'NonText' })
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
