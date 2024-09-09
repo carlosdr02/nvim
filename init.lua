@@ -95,6 +95,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 
+lspconfig.clangd.setup {
+    capabilities = capabilities,
+    cmd = { 'clangd', '--header-insertion=never' }
+}
+
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'ts_ls', 'eslint' }
 for _, lsp in ipairs(servers) do
@@ -156,7 +161,7 @@ cmp.event:on(
 )
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'javascript', 'typescript' },
+    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript' },
     sync_install = false,
 
     highlight = {
@@ -293,3 +298,5 @@ vim.keymap.set('n', '<leader>6', function() ui.nav_file(6) end)
 vim.keymap.set('n', '<leader>7', function() ui.nav_file(7) end)
 vim.keymap.set('n', '<leader>8', function() ui.nav_file(8) end)
 vim.keymap.set('n', '<leader>9', function() ui.nav_file(9) end)
+
+vim.keymap.set('n', '<leader>s', '<cmd>ClangdSwitchSourceHeader<cr>')
