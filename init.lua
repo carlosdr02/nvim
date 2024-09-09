@@ -58,7 +58,6 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = 'nvim-lua/plenary.nvim'
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
 
     -- Lualine
     { 'nvim-lualine/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
@@ -76,10 +75,7 @@ require('lazy').setup({
     },
 
     -- Harpoon
-    { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
-
-    -- Tmux
-    'aserowy/tmux.nvim'
+    { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' }
 })
 
 require('kanagawa').setup({
@@ -99,14 +95,6 @@ lspconfig.clangd.setup {
     capabilities = capabilities,
     cmd = { 'clangd', '--header-insertion=never' }
 }
-
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'ts_ls', 'eslint' }
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        capabilities = capabilities,
-    }
-end
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -161,7 +149,7 @@ cmp.event:on(
 )
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript' },
+    ensure_installed = { 'c', 'cpp' },
     sync_install = false,
 
     highlight = {
@@ -194,8 +182,6 @@ telescope.setup {
     }
 }
 
-require('telescope').load_extension('fzf')
-
 require('nvim-tree').setup {
     actions = {
         open_file = {
@@ -218,7 +204,6 @@ require('bufferline').setup({
 })
 
 require('lualine').setup()
-require('tmux').setup()
 
 -- Keymaps
 vim.keymap.set('i', 'jk', '<esc>')
@@ -233,11 +218,10 @@ vim.keymap.set('i', 'KJ', '<esc>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
-local tmux = require('tmux')
-vim.keymap.set('n', '<c-h>', tmux.move_left)
-vim.keymap.set('n', '<c-j>', tmux.move_bottom)
-vim.keymap.set('n', '<c-k>', tmux.move_top)
-vim.keymap.set('n', '<c-l>', tmux.move_right)
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
@@ -289,14 +273,14 @@ local ui = require('harpoon.ui')
 vim.keymap.set('n', '<leader>a', mark.add_file)
 vim.keymap.set('n', '<leader>m', ui.toggle_quick_menu)
 
-vim.keymap.set('n', '<leader>1', function() ui.nav_file(1) end)
-vim.keymap.set('n', '<leader>2', function() ui.nav_file(2) end)
-vim.keymap.set('n', '<leader>3', function() ui.nav_file(3) end)
-vim.keymap.set('n', '<leader>4', function() ui.nav_file(4) end)
-vim.keymap.set('n', '<leader>5', function() ui.nav_file(5) end)
-vim.keymap.set('n', '<leader>6', function() ui.nav_file(6) end)
-vim.keymap.set('n', '<leader>7', function() ui.nav_file(7) end)
-vim.keymap.set('n', '<leader>8', function() ui.nav_file(8) end)
-vim.keymap.set('n', '<leader>9', function() ui.nav_file(9) end)
+vim.keymap.set('n', '<m-1>', function() ui.nav_file(1) end)
+vim.keymap.set('n', '<m-2>', function() ui.nav_file(2) end)
+vim.keymap.set('n', '<m-3>', function() ui.nav_file(3) end)
+vim.keymap.set('n', '<m-4>', function() ui.nav_file(4) end)
+vim.keymap.set('n', '<m-5>', function() ui.nav_file(5) end)
+vim.keymap.set('n', '<m-6>', function() ui.nav_file(6) end)
+vim.keymap.set('n', '<m-7>', function() ui.nav_file(7) end)
+vim.keymap.set('n', '<m-8>', function() ui.nav_file(8) end)
+vim.keymap.set('n', '<m-9>', function() ui.nav_file(9) end)
 
 vim.keymap.set('n', '<leader>s', '<cmd>ClangdSwitchSourceHeader<cr>')
