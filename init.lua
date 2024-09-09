@@ -85,10 +85,13 @@ require('lazy').setup({
 require('kanagawa').setup({
     commentStyle = { italic = false },
     keywordStyle = { italic = false },
-    statementStyle = { bold = false }
+    statementStyle = { bold = false },
+    transparent = true
 })
 
 vim.cmd.colorscheme('kanagawa')
+
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = 'NonText' })
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -203,9 +206,9 @@ require('bufferline').setup({
     options = {
         offsets = {
             {
-                filetype = "NvimTree",
-                text = "File Explorer",
-                text_align = "center",
+                filetype = 'NvimTree',
+                text = 'File Explorer',
+                text_align = 'center',
                 separator = true
             }
         }
