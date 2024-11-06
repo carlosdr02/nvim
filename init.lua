@@ -42,6 +42,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     -- Colorscheme
     'rebelot/kanagawa.nvim',
+    { 'ellisonleao/gruvbox.nvim', priority = 1000 , config = true, opts = ...},
 
     -- LSP
     'neovim/nvim-lspconfig',
@@ -88,7 +89,17 @@ require('kanagawa').setup({
     statementStyle = { bold = false }
 })
 
-vim.cmd.colorscheme('kanagawa')
+require('gruvbox').setup({
+    bold = false,
+    italic = {
+        strings = false,
+        emphasis = false,
+        comments = false,
+        folds = false
+    }
+})
+
+vim.cmd.colorscheme('gruvbox')
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
