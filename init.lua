@@ -10,9 +10,9 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.shiftround = true
 vim.o.scrolloff = 12
-vim.o.hlsearch = false
 vim.o.showmode = false
 vim.o.swapfile = false
+vim.o.ignorecase = true
 
 vim.g.mapleader = ' '
 vim.g.loaded_netrw = 1
@@ -311,3 +311,5 @@ vim.keymap.set('n', '<leader>8', function() ui.nav_file(8) end)
 vim.keymap.set('n', '<leader>9', function() ui.nav_file(9) end)
 
 vim.keymap.set('n', '<leader>s', '<cmd>ClangdSwitchSourceHeader<cr>')
+
+vim.keymap.set('n', '<leader>n', '<cmd>noh<cr>')
