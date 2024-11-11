@@ -80,7 +80,10 @@ require('lazy').setup({
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
     -- Tmux
-    'aserowy/tmux.nvim'
+    'aserowy/tmux.nvim',
+
+    -- Vim Fugitive
+    'tpope/vim-fugitive'
 })
 
 require('kanagawa').setup({
