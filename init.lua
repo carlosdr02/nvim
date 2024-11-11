@@ -13,6 +13,7 @@ vim.o.scrolloff = 12
 vim.o.showmode = false
 vim.o.swapfile = false
 vim.o.ignorecase = true
+vim.o.smartcase = true
 
 vim.g.mapleader = ' '
 vim.g.loaded_netrw = 1
