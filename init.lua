@@ -176,7 +176,7 @@ cmp.event:on(
 )
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript' },
+    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript', 'vue', 'html', 'css' },
     sync_install = false,
 
     highlight = {
