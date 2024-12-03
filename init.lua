@@ -116,7 +116,7 @@ lspconfig.clangd.setup {
 }
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'ts_ls', 'eslint' }
+local servers = { 'ts_ls', 'eslint', 'html', 'cssls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities,
