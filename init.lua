@@ -115,8 +115,24 @@ lspconfig.clangd.setup {
     cmd = { 'clangd', '--header-insertion=never' }
 }
 
+lspconfig.ts_ls.setup {
+    capabilities = capabilities,
+    init_options = {
+        plugins = { -- I think this was my breakthrough that made it work
+            {
+                name = '@vue/typescript-plugin',
+                location = '/home/carlos/.nvm/versions/node/v18.20.4/lib/node_modules/@vue/language-server',
+                languages = { 'vue' }
+            }
+        }
+    },
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+}
+
+lspconfig.volar.setup {}
+
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'ts_ls', 'eslint', 'html', 'cssls' }
+local servers = { 'eslint', 'html', 'cssls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities,
