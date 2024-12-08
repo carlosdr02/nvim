@@ -274,6 +274,10 @@ vim.keymap.set('i', 'KJ', '<esc>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
