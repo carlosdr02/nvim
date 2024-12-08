@@ -7,7 +7,7 @@ vim.o.termguicolors = true
 vim.o.wrap = false
 vim.o.clipboard = 'unnamedplus'
 vim.o.expandtab = true
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
 vim.o.shiftround = true
 vim.o.scrolloff = 12
 vim.o.showmode = false
@@ -18,6 +18,20 @@ vim.o.smartcase = true
 vim.g.mapleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'typescript', 'javascript', 'html', 'css', 'scss', 'vue', 'json' },
+    callback = function()
+        vim.opt.shiftwidth = 2
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c', 'cpp', 'cmake', 'lua' },
+    callback = function()
+        vim.opt.shiftwidth = 4
+    end
+})
 
 -- Plugins
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
