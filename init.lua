@@ -80,9 +80,6 @@ require('lazy').setup({
     -- Harpoon
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
-    -- Tmux
-    'aserowy/tmux.nvim',
-
     -- Vim Fugitive
     'tpope/vim-fugitive'
 })
@@ -249,7 +246,6 @@ require('bufferline').setup({
 })
 
 require('lualine').setup()
-require('tmux').setup()
 
 -- Keymaps
 vim.keymap.set('i', 'jk', '<esc>')
@@ -264,11 +260,6 @@ vim.keymap.set('i', 'KJ', '<esc>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
-local tmux = require('tmux')
-vim.keymap.set('n', '<c-h>', tmux.move_left)
-vim.keymap.set('n', '<c-j>', tmux.move_bottom)
-vim.keymap.set('n', '<c-k>', tmux.move_top)
-vim.keymap.set('n', '<c-l>', tmux.move_right)
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
