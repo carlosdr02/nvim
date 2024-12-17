@@ -95,8 +95,13 @@ require('lazy').setup({
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
     -- Vim Fugitive
-    'tpope/vim-fugitive'
+    'tpope/vim-fugitive',
+
+    -- Git signs
+    'lewis6991/gitsigns.nvim'
 })
+
+require('gitsigns').setup()
 
 require('kanagawa').setup({
     commentStyle = { italic = false },
@@ -114,7 +119,7 @@ require('gruvbox').setup({
     }
 })
 
-vim.cmd.colorscheme('gruvbox')
+vim.cmd.colorscheme('kanagawa')
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
