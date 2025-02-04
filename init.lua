@@ -57,6 +57,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     -- Colorscheme
     'rebelot/kanagawa.nvim',
+    'ellisonleao/gruvbox.nvim',
 
     -- LSP
     'neovim/nvim-lspconfig',
@@ -106,6 +107,16 @@ require('kanagawa').setup({
     commentStyle = { italic = false },
     keywordStyle = { italic = false },
     statementStyle = { bold = false }
+})
+
+require('gruvbox').setup({
+    bold = false,
+    italic = {
+        strings = false,
+        emphasis = false,
+        comments = false,
+        folds = false
+    }
 })
 
 vim.cmd.colorscheme('kanagawa')
