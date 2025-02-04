@@ -137,7 +137,7 @@ lspconfig.ts_ls.setup {
 lspconfig.volar.setup {}
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'eslint', 'html', 'cssls' }
+local servers = { 'eslint', 'html', 'cssls', 'pyright' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities = capabilities,
@@ -197,7 +197,7 @@ cmp.event:on(
 )
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript', 'vue', 'html', 'css' },
+    ensure_installed = { 'c', 'cpp', 'javascript', 'typescript', 'vue', 'html', 'css', 'python' },
     sync_install = false,
 
     highlight = {
