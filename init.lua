@@ -95,7 +95,18 @@ require('lazy').setup({
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
     -- Vim Fugitive
-    'tpope/vim-fugitive'
+    'tpope/vim-fugitive',
+
+    -- Venv selector
+    {
+        'linux-cultist/venv-selector.nvim',
+        dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+        event = 'VeryLazy',
+        keys = {
+            { '<leader>vs', '<cmd>VenvSelect<cr>' },
+            { '<leader>vc', '<cmd>VenvSelectCached<cr>' }
+        }
+    }
 })
 
 require('kanagawa').setup({
@@ -114,7 +125,7 @@ require('gruvbox').setup({
     }
 })
 
-vim.cmd.colorscheme('kanagawa')
+vim.cmd.colorscheme('gruvbox')
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
