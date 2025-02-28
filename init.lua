@@ -95,13 +95,8 @@ require('lazy').setup({
     { 'theprimeagen/harpoon', dependencies = 'nvim-lua/plenary.nvim' },
 
     -- Vim Fugitive
-    'tpope/vim-fugitive',
-
-    -- Git signs
-    'lewis6991/gitsigns.nvim'
+    'tpope/vim-fugitive'
 })
-
-require('gitsigns').setup()
 
 require('kanagawa').setup({
     commentStyle = { italic = false },
