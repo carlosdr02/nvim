@@ -97,6 +97,12 @@ require('lazy').setup({
     -- Vim Fugitive
     'tpope/vim-fugitive',
 
+    -- Tmux
+    {
+        'aserowy/tmux.nvim',
+        config = function() return require('tmux').setup() end
+    },
+
     -- Venv selector
     {
         'linux-cultist/venv-selector.nvim',
@@ -295,10 +301,11 @@ vim.keymap.set('i', 'KJ', '<esc>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
-vim.keymap.set('n', '<c-h>', '<c-w>h')
-vim.keymap.set('n', '<c-j>', '<c-w>j')
-vim.keymap.set('n', '<c-k>', '<c-w>k')
-vim.keymap.set('n', '<c-l>', '<c-w>l')
+local tmux = require('tmux')
+vim.keymap.set('n', '<c-h>', tmux.move_left)
+vim.keymap.set('n', '<c-j>', tmux.move_bottom)
+vim.keymap.set('n', '<c-k>', tmux.move_top)
+vim.keymap.set('n', '<c-l>', tmux.move_right)
 vim.keymap.set('n', '<m-q>', '<cmd>q!<cr>')
 vim.keymap.set('n', '<m-o>', '<cmd>on<cr>')
 
