@@ -138,7 +138,7 @@ require('gruvbox').setup({
     }
 })
 
-vim.cmd.colorscheme('gruvbox')
+vim.cmd.colorscheme('kanagawa')
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -156,7 +156,7 @@ lspconfig.ts_ls.setup {
         plugins = { -- I think this was my breakthrough that made it work
             {
                 name = '@vue/typescript-plugin',
-                location = '/home/carlos/.nvm/versions/node/v18.20.4/lib/node_modules/@vue/language-server',
+                location = '/usr/lib/node_modules/@vue/language-server',
                 languages = { 'vue' }
             }
         }
