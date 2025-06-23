@@ -35,10 +35,11 @@ vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 
 -- navigate and close buffers
+local utils = require('utils')
 vim.keymap.set('n', '<tab>', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<s-tab>', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>bd!<cr>')
-vim.keymap.set('n', '<leader>o', require('utils').CloseAllButCurrentBuffer, { desc = 'Close all buffers but current' })
+vim.keymap.set('n', '<leader>o', utils.CloseAllButCurrentBuffer, { desc = 'Close all buffers but current' })
 
 -- close windows
 vim.keymap.set('n', '<a-o>', '<cmd>on<cr>')
@@ -57,8 +58,8 @@ vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', silent)
 vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', silent)
 vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', silent)
 
--- toggle file explorer
-vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+-- open file tree
+vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Open parent directory' })
 
 -- switch between source and header files (C/C++ only)
 vim.keymap.set('n', '<leader>s', '<cmd>LspClangdSwitchSourceHeader<cr>')
