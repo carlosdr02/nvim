@@ -154,6 +154,10 @@ require('lazy').setup({
         {
             'windwp/nvim-autopairs',
             config = true
+        },
+        {
+            'theprimeagen/harpoon',
+            dependencies = { 'nvim-lua/plenary.nvim' }
         }
     },
     install = { colorscheme = { 'rose-pine' } }
