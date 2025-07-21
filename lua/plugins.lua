@@ -29,7 +29,24 @@ require('lazy').setup({
                     }
                 })
 
-                vim.cmd.colorscheme('rose-pine')
+                --vim.cmd.colorscheme('rose-pine')
+            end
+        },
+        {
+            'ellisonleao/gruvbox.nvim',
+            config = function()
+                require('gruvbox').setup({
+                    bold = false,
+                    italic = {
+                        strings = false,
+                        emphasis = false,
+                        comments = false,
+                        operators = false,
+                        folds = false,
+                    }
+                })
+
+                vim.cmd.colorscheme('gruvbox')
             end
         },
         {
