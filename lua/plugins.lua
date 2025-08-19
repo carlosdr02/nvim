@@ -161,18 +161,15 @@ require('lazy').setup({
             end
         },
         {
+            'akinsho/bufferline.nvim',
+            version = '*',
+            dependencies = 'nvim-tree/nvim-web-devicons'
+        },
+        {
             'nvim-lualine/lualine.nvim',
             dependencies = { 'nvim-tree/nvim-web-devicons' },
             opts = {
                 options = { section_separators = '', component_separators = '│' },
-                tabline = {
-                    lualine_a = {
-                        {
-                            'buffers',
-                            symbols = { alternate_file = '' }
-                        }
-                    }
-                },
                 sections = {
                     lualine_c = {
                         {
@@ -205,6 +202,8 @@ require('lazy').setup({
         }
     },
 })
+
+require('bufferline').setup()
 
 vim.lsp.config('clangd', {
     cmd = { 'clangd', '--header-insertion=never' }

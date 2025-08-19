@@ -35,11 +35,10 @@ vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float)
 
 -- navigate and close buffers
-local utils = require('utils')
-vim.keymap.set('n', '<tab>', '<cmd>bnext<cr>')
-vim.keymap.set('n', '<s-tab>', '<cmd>bprev<cr>')
+vim.keymap.set('n', '<tab>', '<cmd>BufferLineCycleNext<cr>')
+vim.keymap.set('n', '<s-tab>', '<cmd>BufferLineCyclePrev<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>bd!<cr>')
-vim.keymap.set('n', '<leader>o', utils.CloseAllButCurrentBuffer, { desc = 'Close all buffers but current' })
+vim.keymap.set('n', '<leader>o', '<cmd>BufferLineCloseOthers<cr>')
 
 -- close windows
 vim.keymap.set('n', '<a-o>', '<cmd>on<cr>')
