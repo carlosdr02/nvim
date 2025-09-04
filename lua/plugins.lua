@@ -19,20 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     spec = {
         {
-            'rose-pine/neovim',
-            name = 'rose-pine',
-            config = function()
-                require('rose-pine').setup({
-                    styles = {
-                        bold = false,
-                        italic = false
-                    }
-                })
-
-                --vim.cmd.colorscheme('rose-pine')
-            end
-        },
-        {
             'ellisonleao/gruvbox.nvim',
             config = function()
                 require('gruvbox').setup({
