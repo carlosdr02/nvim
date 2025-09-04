@@ -18,37 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require('lazy').setup({
     spec = {
-        {
-            'rose-pine/neovim',
-            name = 'rose-pine',
-            config = function()
-                require('rose-pine').setup({
-                    styles = {
-                        bold = false,
-                        italic = false
-                    }
-                })
-
-                --vim.cmd.colorscheme('rose-pine')
-            end
-        },
-        {
-            'ellisonleao/gruvbox.nvim',
-            config = function()
-                require('gruvbox').setup({
-                    bold = false,
-                    italic = {
-                        strings = false,
-                        emphasis = false,
-                        comments = false,
-                        operators = false,
-                        folds = false,
-                    }
-                })
-
-                vim.cmd.colorscheme('gruvbox')
-            end
-        },
+        'ellisonleao/gruvbox.nvim',
         {
             'nvim-treesitter/nvim-treesitter',
             build = ':TSUpdate',
@@ -203,6 +173,7 @@ require('lazy').setup({
     },
 })
 
+vim.cmd.colorscheme('gruvbox')
 require('bufferline').setup()
 
 vim.lsp.config('clangd', {
