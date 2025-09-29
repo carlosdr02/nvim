@@ -32,7 +32,22 @@ require('lazy').setup({
                     }
                 })
 
-                vim.cmd.colorscheme('gruvbox')
+                --vim.cmd.colorscheme('gruvbox')
+            end
+        },
+        {
+            'rose-pine/neovim',
+            name = 'rose-pine',
+            config = function()
+                require('rose-pine').setup({
+                    styles = {
+                        bold = false,
+                        italic = false,
+                        transparency = false,
+                    }
+                })
+
+                vim.cmd.colorscheme('rose-pine')
             end
         },
         {
