@@ -84,13 +84,6 @@ require('lazy').setup({
         },
         'nvim-treesitter/nvim-treesitter-textobjects',
         {
-            'nvim-treesitter/nvim-treesitter-context',
-            opts = {
-                max_lines = 1,
-                trim_scope = 'inner'
-            }
-        },
-        {
             'mason-org/mason-lspconfig.nvim',
             opts = {},
             dependencies = {
