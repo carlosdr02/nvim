@@ -29,6 +29,8 @@ vim.opt.swapfile = false
 vim.opt.signcolumn = 'no'
 vim.opt.shiftround = true
 vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -167,7 +169,9 @@ vim.keymap.set('n', '<leader>gcb', fzf.git_bcommits, { desc = 'Git commits (buff
 vim.keymap.set('n', '<leader>gs', fzf.git_stash, { desc = 'Git stash' })
 
 vim.keymap.set('n', '<leader>mh', fzf.helptags, { desc = 'Misc help tags' })
-vim.keymap.set('n', '<leader>mc', fzf.colorschemes, { desc = 'Misc colorschemes' })
 vim.keymap.set('n', '<leader>mk', fzf.keymaps, { desc = 'Misc keymaps' })
 vim.keymap.set('n', '<leader>ms', fzf.search_history, { desc = 'Misc search history' })
 vim.keymap.set('n', '<leader>mo', fzf.nvim_options, { desc = 'Misc nvim options' })
+vim.keymap.set('n', '<leader>mcs', fzf.colorschemes, { desc = 'Misc colorschemes' })
+vim.keymap.set('n', '<leader>mcc', fzf.commands, { desc = 'Misc neovim commands' })
+vim.keymap.set('n', '<leader>mch', fzf.command_history, { desc = 'Misc command history' })
