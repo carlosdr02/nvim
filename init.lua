@@ -185,3 +185,8 @@ vim.keymap.set('n', '<leader>mo', fzf.nvim_options, { desc = 'Misc nvim options'
 vim.keymap.set('n', '<leader>mcs', fzf.colorschemes, { desc = 'Misc colorschemes' })
 vim.keymap.set('n', '<leader>mcc', fzf.commands, { desc = 'Misc neovim commands' })
 vim.keymap.set('n', '<leader>mch', fzf.command_history, { desc = 'Misc command history' })
+
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
