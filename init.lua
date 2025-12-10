@@ -118,6 +118,18 @@ require("lazy").setup({
                     { path = "${3rd}/luv/library", words = { "vim%.uv" } },
                 },
             },
+        },
+        {
+            "ibhagwan/fzf-lua",
+            -- optional for icon support
+            dependencies = { "nvim-tree/nvim-web-devicons" },
+            -- or if using mini.icons/mini.nvim
+            -- dependencies = { "nvim-mini/mini.icons" },
+            ---@module "fzf-lua"
+            ---@type fzf-lua.Config|{}
+            ---@diagnostics disable: missing-fields
+            opts = {}
+            ---@diagnostics enable: missing-fields
         }
     },
     -- Configure any other settings here. See the documentation for more details.
@@ -127,3 +139,6 @@ require("lazy").setup({
     -- @carlosdr02 changed this to false
     checker = { enabled = false },
 })
+
+local fzf = require('fzf-lua')
+vim.keymap.set('n', '<leader>ff', fzf.files)
