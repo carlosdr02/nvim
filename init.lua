@@ -27,6 +27,8 @@ vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.signcolumn = 'no'
+vim.opt.shiftround = true
+vim.opt.expandtab = true
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -141,4 +143,31 @@ require("lazy").setup({
 })
 
 local fzf = require('fzf-lua')
-vim.keymap.set('n', '<leader>ff', fzf.files)
+vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = 'Find open buffers' })
+vim.keymap.set('n', '<leader>fg', fzf.live_grep_native, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>fw', fzf.grep_cword, { desc = 'Find word under cursor' })
+
+vim.keymap.set('n', '<leader>lr', fzf.lsp_references, { desc = 'LSP references' })
+vim.keymap.set('n', '<leader>lg', fzf.lsp_definitions, { desc = 'LSP definitions' })
+vim.keymap.set('n', '<leader>lG', fzf.lsp_declarations, { desc = 'LSP declarations' })
+vim.keymap.set('n', '<leader>lt', fzf.lsp_typedefs, { desc = 'LSP type definitions' })
+vim.keymap.set('n', '<leader>lsd', fzf.lsp_document_symbols, { desc = 'LSP symbols (document)' })
+vim.keymap.set('n', '<leader>lsw', fzf.lsp_workspace_symbols, { desc = 'LSP symbols (workspace)' })
+vim.keymap.set('n', '<leader>lci', fzf.lsp_incoming_calls, { desc = 'LSP calls (incoming)' })
+vim.keymap.set('n', '<leader>lco', fzf.lsp_outgoing_calls, { desc = 'LSP calls (outgoing)' })
+vim.keymap.set('n', '<leader>lca', fzf.lsp_code_actions, { desc = 'LSP code actions' })
+vim.keymap.set('n', '<leader>ldd', fzf.lsp_document_diagnostics, { desc = 'LSP diagnostics (document)' })
+vim.keymap.set('n', '<leader>ldw', fzf.lsp_workspace_diagnostics, { desc = 'LSP diagnostics (workspace)' })
+
+vim.keymap.set('n', '<leader>gf', fzf.git_files, { desc = 'Git files' })
+vim.keymap.set('n', '<leader>gb', fzf.git_branches, { desc = 'Git branches' })
+vim.keymap.set('n', '<leader>gcp', fzf.git_commits, { desc = 'Git commits (project)' })
+vim.keymap.set('n', '<leader>gcb', fzf.git_bcommits, { desc = 'Git commits (buffer)' })
+vim.keymap.set('n', '<leader>gs', fzf.git_stash, { desc = 'Git stash' })
+
+vim.keymap.set('n', '<leader>mh', fzf.helptags, { desc = 'Misc help tags' })
+vim.keymap.set('n', '<leader>mc', fzf.colorschemes, { desc = 'Misc colorschemes' })
+vim.keymap.set('n', '<leader>mk', fzf.keymaps, { desc = 'Misc keymaps' })
+vim.keymap.set('n', '<leader>ms', fzf.search_history, { desc = 'Misc search history' })
+vim.keymap.set('n', '<leader>mo', fzf.nvim_options, { desc = 'Misc nvim options' })
