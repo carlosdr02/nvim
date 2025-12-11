@@ -37,6 +37,8 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.diagnostic.config({
     virtual_text = true
@@ -48,7 +50,13 @@ require("lazy").setup({
         {
             "rose-pine/neovim", name = "rose-pine",
             config = function()
-                vim.cmd.colorscheme('rose-pine')
+                --vim.cmd.colorscheme('rose-pine')
+            end
+        },
+        {
+            "ellisonleao/gruvbox.nvim", priority = 1000,
+            config = function()
+                vim.cmd.colorscheme('gruvbox')
             end
         },
         {
