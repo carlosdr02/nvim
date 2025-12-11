@@ -63,7 +63,7 @@ require("lazy").setup({
         {
             "mason-org/mason-lspconfig.nvim",
             opts = {
-                ensure_installed = { 'lua_ls', 'pyright', 'clangd', 'ts_ls' }
+                ensure_installed = { 'pyright', 'clangd', 'ts_ls' }
             },
             dependencies = {
                 { "mason-org/mason.nvim", opts = {} },
@@ -111,15 +111,7 @@ require("lazy").setup({
                 -- Default list of enabled providers defined so that you can extend it
                 -- elsewhere in your config, without redefining it, due to `opts_extend`
                 sources = {
-                    default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-                    providers = {
-                        lazydev = {
-                            name = "LazyDev",
-                            module = "lazydev.integrations.blink",
-                            -- make lazydev completions top priority (see `:h blink.cmp`)
-                            score_offset = 100,
-                        },
-                    }
+                    default = { 'lsp', 'path', 'snippets', 'buffer' }
                 },
 
                 -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -130,17 +122,6 @@ require("lazy").setup({
                 fuzzy = { implementation = "prefer_rust_with_warning" }
             },
             opts_extend = { "sources.default" }
-        },
-        {
-            "folke/lazydev.nvim",
-            ft = "lua", -- only load on lua files
-            opts = {
-                library = {
-                    -- See the configuration section for more details
-                    -- Load luvit types when the `vim.uv` word is found
-                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                },
-            },
         },
         {
             "ibhagwan/fzf-lua",
@@ -178,6 +159,18 @@ require("lazy").setup({
             -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
             -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
             lazy = false,
+        },
+        {
+            "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate",
+            config = function()
+                require('nvim-treesitter.configs').setup({
+                    ensure_installed = { "c", "cpp", "typescript", "python" },
+                    highlight = {
+                        enable = true,
+                        additional_vim_regex_highlighting = false,
+                    }
+                })
+            end
         }
     },
     -- Configure any other settings here. See the documentation for more details.
