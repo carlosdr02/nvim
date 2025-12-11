@@ -168,3 +168,10 @@ vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("n", "<leader>s", "<CMD>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between source and header files in C & C++" })
+
+vim.keymap.set('n', '<a-n>', ':m .+1<cr>==', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('n', '<a-p>', ':m .-2<cr>==', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('i', '<a-n>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('i', '<a-p>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('v', '<a-n>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
+vim.keymap.set('v', '<a-p>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
