@@ -46,13 +46,13 @@ require("lazy").setup({
         {
             "rose-pine/neovim", name = "rose-pine",
             config = function()
-                vim.cmd.colorscheme('rose-pine')
+                --vim.cmd.colorscheme('rose-pine')
             end
         },
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
             config = function()
-                --vim.cmd.colorscheme('gruvbox')
+                vim.cmd.colorscheme('gruvbox')
             end
         },
         {
@@ -124,6 +124,10 @@ require("lazy").setup({
     checker = { enabled = false },
 })
 
+vim.lsp.config('clangd', {
+    cmd = { 'clangd', '--header-insertion=never' }
+})
+
 local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = 'Find open buffers' })
@@ -162,3 +166,5 @@ vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+vim.keymap.set("n", "<leader>s", "<CMD>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between source and header files in C & C++" })
