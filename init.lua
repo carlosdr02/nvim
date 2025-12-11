@@ -39,6 +39,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.showmode = false
 
 vim.diagnostic.config({
     virtual_text = true
@@ -50,13 +51,13 @@ require("lazy").setup({
         {
             "rose-pine/neovim", name = "rose-pine",
             config = function()
-                --vim.cmd.colorscheme('rose-pine')
+                vim.cmd.colorscheme('rose-pine')
             end
         },
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
             config = function()
-                vim.cmd.colorscheme('gruvbox')
+                --vim.cmd.colorscheme('gruvbox')
             end
         },
         {
@@ -152,6 +153,11 @@ require("lazy").setup({
             ---@diagnostics disable: missing-fields
             opts = {}
             ---@diagnostics enable: missing-fields
+        },
+        {
+            'nvim-lualine/lualine.nvim',
+            dependencies = { 'nvim-tree/nvim-web-devicons' },
+            opts = {}
         }
     },
     -- Configure any other settings here. See the documentation for more details.
