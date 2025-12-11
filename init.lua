@@ -157,7 +157,27 @@ require("lazy").setup({
         {
             'nvim-lualine/lualine.nvim',
             dependencies = { 'nvim-tree/nvim-web-devicons' },
-            opts = {}
+            opts = {
+                sections = {
+                    lualine_c = {
+                        {
+                            'filename',
+                            path = 1
+                        }
+                    }
+                }
+            }
+        },
+        {
+            'stevearc/oil.nvim',
+            ---@module 'oil'
+            ---@type oil.SetupOpts
+            opts = {},
+            -- Optional dependencies
+            dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+            -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+            -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+            lazy = false,
         }
     },
     -- Configure any other settings here. See the documentation for more details.
@@ -204,3 +224,5 @@ vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
