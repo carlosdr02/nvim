@@ -41,6 +41,10 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+vim.lsp.config('clangd', {
+    cmd = { 'clangd', '--header-insertion=never' }
+})
+
 require("lazy").setup({
     spec = {
         {
@@ -118,14 +122,14 @@ require("lazy").setup({
                     }
                 })
             end
+        },
+        {
+            'theprimeagen/harpoon',
+            dependencies = { 'nvim-lua/plenary.nvim' }
         }
     },
     install = { colorscheme = { "habamax" } },
     checker = { enabled = false },
-})
-
-vim.lsp.config('clangd', {
-    cmd = { 'clangd', '--header-insertion=never' }
 })
 
 local fzf = require('fzf-lua')
@@ -175,3 +179,10 @@ vim.keymap.set('i', '<a-n>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cu
 vim.keymap.set('i', '<a-p>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
 vim.keymap.set('v', '<a-n>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
 vim.keymap.set('v', '<a-p>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
+
+local harpoonui = require('harpoon.ui')
+vim.keymap.set("n", "<leader>ha", require('harpoon.mark').add_file, { desc = "Add file to harpoon" })
+vim.keymap.set("n", "<leader>hm", harpoonui.toggle_quick_menu, { desc = "Toggle harpoon menu" })
+vim.keymap.set("n", "<a-j>", function() harpoonui.nav_file(1) end, { desc = "Go to harpoon file 1" })
+vim.keymap.set("n", "<a-k>", function() harpoonui.nav_file(2) end, { desc = "Go to harpoon file 2" })
+vim.keymap.set("n", "<a-l>", function() harpoonui.nav_file(3) end, { desc = "Go to harpoon file 3" })
