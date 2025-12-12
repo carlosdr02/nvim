@@ -89,7 +89,13 @@ require("lazy").setup({
         {
             "ibhagwan/fzf-lua",
             dependencies = { "nvim-tree/nvim-web-devicons" },
-            opts = {}
+            opts = {
+                keymap = {
+                    fzf = {
+                        ["ctrl-q"] = "select-all+accept",
+                    },
+                }
+            }
         },
         {
             'nvim-lualine/lualine.nvim',
