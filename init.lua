@@ -138,9 +138,13 @@ require("lazy").setup({
         {
             'theprimeagen/harpoon',
             dependencies = { 'nvim-lua/plenary.nvim' }
+        },
+        {
+            'windwp/nvim-autopairs',
+            event = "InsertEnter",
+            config = true
         }
     },
-    install = { colorscheme = { "habamax" } },
     checker = { enabled = false },
 })
 
