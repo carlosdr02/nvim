@@ -56,13 +56,19 @@ require("lazy").setup({
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
             config = function()
-                --vim.cmd.colorscheme('gruvbox')
+                vim.cmd.colorscheme('gruvbox')
             end
         },
         {
             "rebelot/kanagawa.nvim",
             config = function()
-                vim.cmd.colorscheme('kanagawa')
+                --vim.cmd.colorscheme('kanagawa')
+            end
+        },
+        {
+            "catppuccin/nvim", name = "catppuccin", priority = 1000,
+            config = function()
+                --vim.cmd.colorscheme('catppuccin')
             end
         },
         {
@@ -143,6 +149,9 @@ require("lazy").setup({
             'windwp/nvim-autopairs',
             event = "InsertEnter",
             config = true
+        },
+        {
+            'tpope/vim-fugitive'
         }
     },
     checker = { enabled = false },
@@ -171,6 +180,7 @@ vim.keymap.set('n', '<leader>gb', fzf.git_branches, { desc = 'Git branches' })
 vim.keymap.set('n', '<leader>gcp', fzf.git_commits, { desc = 'Git commits (project)' })
 vim.keymap.set('n', '<leader>gcb', fzf.git_bcommits, { desc = 'Git commits (buffer)' })
 vim.keymap.set('n', '<leader>gs', fzf.git_stash, { desc = 'Git stash' })
+vim.keymap.set('n', '<leader>gw', fzf.git_worktrees, { desc = 'Git worktrees' })
 
 vim.keymap.set('n', '<leader>mh', fzf.helptags, { desc = 'Misc help tags' })
 vim.keymap.set('n', '<leader>mk', fzf.keymaps, { desc = 'Misc keymaps' })
@@ -196,8 +206,9 @@ vim.keymap.set('i', '<a-p>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cu
 vim.keymap.set('v', '<a-n>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
 vim.keymap.set('v', '<a-p>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
 
+local harpoonmark = require('harpoon.mark')
 local harpoonui = require('harpoon.ui')
-vim.keymap.set("n", "<leader>ha", require('harpoon.mark').add_file, { desc = "Add file to harpoon" })
+vim.keymap.set("n", "<leader>ha", harpoonmark.add_file, { desc = "Add file to harpoon" })
 vim.keymap.set("n", "<leader>hm", harpoonui.toggle_quick_menu, { desc = "Toggle harpoon menu" })
 vim.keymap.set("n", "<a-j>", function() harpoonui.nav_file(1) end, { desc = "Go to harpoon file 1" })
 vim.keymap.set("n", "<a-k>", function() harpoonui.nav_file(2) end, { desc = "Go to harpoon file 2" })
