@@ -36,6 +36,7 @@ vim.opt.splitbelow = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showmode = false
+vim.opt.guicursor = ""
 
 vim.diagnostic.config({
     virtual_text = true
@@ -56,13 +57,13 @@ require("lazy").setup({
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
             config = function()
-                vim.cmd.colorscheme('gruvbox')
+                --vim.cmd.colorscheme('gruvbox')
             end
         },
         {
             "rebelot/kanagawa.nvim",
             config = function()
-                --vim.cmd.colorscheme('kanagawa')
+                vim.cmd.colorscheme('kanagawa')
             end
         },
         {
