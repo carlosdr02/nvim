@@ -75,11 +75,20 @@ require("lazy").setup({
         {
             "mason-org/mason-lspconfig.nvim",
             opts = {
-                ensure_installed = { 'pyright', 'clangd', 'ts_ls' }
+                ensure_installed = { 'pyright', 'clangd', 'ts_ls', 'lua_ls' }
             },
             dependencies = {
                 { "mason-org/mason.nvim", opts = {} },
                 "neovim/nvim-lspconfig",
+            },
+        },
+        {
+            "folke/lazydev.nvim",
+            ft = "lua",
+            opts = {
+                library = {
+                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                },
             },
         },
         {
@@ -93,7 +102,14 @@ require("lazy").setup({
                 },
                 completion = { documentation = { auto_show = false } },
                 sources = {
-                    default = { 'lsp', 'path', 'snippets', 'buffer' }
+                    default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+                    providers = {
+                        lazydev = {
+                            name = "LazyDev",
+                            module = "lazydev.integrations.blink",
+                            score_offset = 100,
+                        },
+                    },
                 },
                 fuzzy = { implementation = "prefer_rust_with_warning" }
             },
@@ -134,8 +150,9 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate",
             dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
             config = function()
+                ---@diagnostic disable-next-line: missing-fields
                 require('nvim-treesitter.configs').setup({
-                    ensure_installed = { "c", "cpp", "typescript", "python" },
+                    ensure_installed = { "c", "cpp", "typescript", "python", "lua" },
                     highlight = {
                         enable = true,
                         additional_vim_regex_highlighting = false,
