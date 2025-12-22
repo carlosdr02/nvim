@@ -57,13 +57,13 @@ require("lazy").setup({
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
             config = function()
-                --vim.cmd.colorscheme('gruvbox')
+                vim.cmd.colorscheme('gruvbox')
             end
         },
         {
             "rebelot/kanagawa.nvim",
             config = function()
-                vim.cmd.colorscheme('kanagawa')
+                --vim.cmd.colorscheme('kanagawa')
             end
         },
         {
@@ -153,6 +153,13 @@ require("lazy").setup({
         },
         {
             'tpope/vim-fugitive'
+        },
+        {
+            'nvim-treesitter/nvim-treesitter-context',
+            opts = {
+                max_lines = 1,
+                trim_scope = 'inner'
+            }
         }
     },
     checker = { enabled = false },
@@ -200,17 +207,26 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("n", "<leader>s", "<CMD>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between source and header files in C & C++" })
 
-vim.keymap.set('n', '<a-n>', ':m .+1<cr>==', { desc = "Move line under cursor down", silent = true })
-vim.keymap.set('n', '<a-p>', ':m .-2<cr>==', { desc = "Move line under cursor up", silent = true })
-vim.keymap.set('i', '<a-n>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cursor down", silent = true })
-vim.keymap.set('i', '<a-p>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
-vim.keymap.set('v', '<a-n>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
-vim.keymap.set('v', '<a-p>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
+vim.keymap.set('n', '<a-j>', ':m .+1<cr>==', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('n', '<a-k>', ':m .-2<cr>==', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
+vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
 
 local harpoonmark = require('harpoon.mark')
 local harpoonui = require('harpoon.ui')
 vim.keymap.set("n", "<leader>ha", harpoonmark.add_file, { desc = "Add file to harpoon" })
 vim.keymap.set("n", "<leader>hm", harpoonui.toggle_quick_menu, { desc = "Toggle harpoon menu" })
-vim.keymap.set("n", "<a-j>", function() harpoonui.nav_file(1) end, { desc = "Go to harpoon file 1" })
-vim.keymap.set("n", "<a-k>", function() harpoonui.nav_file(2) end, { desc = "Go to harpoon file 2" })
-vim.keymap.set("n", "<a-l>", function() harpoonui.nav_file(3) end, { desc = "Go to harpoon file 3" })
+vim.keymap.set("n", "<leader>1", function() harpoonui.nav_file(1) end, { desc = "Go to harpoon file 1" })
+vim.keymap.set("n", "<leader>2", function() harpoonui.nav_file(2) end, { desc = "Go to harpoon file 2" })
+vim.keymap.set("n", "<leader3>", function() harpoonui.nav_file(3) end, { desc = "Go to harpoon file 3" })
+vim.keymap.set("n", "<leader4>", function() harpoonui.nav_file(4) end, { desc = "Go to harpoon file 4" })
+vim.keymap.set("n", "<leader5>", function() harpoonui.nav_file(5) end, { desc = "Go to harpoon file 5" })
+vim.keymap.set("n", "<leader6>", function() harpoonui.nav_file(6) end, { desc = "Go to harpoon file 6" })
+vim.keymap.set("n", "<leader7>", function() harpoonui.nav_file(7) end, { desc = "Go to harpoon file 7" })
+vim.keymap.set("n", "<leader8>", function() harpoonui.nav_file(8) end, { desc = "Go to harpoon file 8" })
+vim.keymap.set("n", "<leader9>", function() harpoonui.nav_file(9) end, { desc = "Go to harpoon file 9" })
+
+vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
