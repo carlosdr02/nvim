@@ -266,7 +266,7 @@ vim.keymap.set("n", "<leader8>", function() harpoonui.nav_file(8) end, { desc = 
 vim.keymap.set("n", "<leader9>", function() harpoonui.nav_file(9) end, { desc = "Go to harpoon file 9" })
 
 vim.keymap.set('n', '<c-n>', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to next diagnostic" })
-vim.keymap.set('n', '<c-p>', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to previous diagnostic" })
+vim.keymap.set('n', '<c-p>', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float, { desc = "Open diagnostic window" })
 
 local treesittercontext = require('treesitter-context')
