@@ -132,13 +132,33 @@ require("lazy").setup({
         },
         {
             "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate",
+            dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
             config = function()
                 require('nvim-treesitter.configs').setup({
                     ensure_installed = { "c", "cpp", "typescript", "python" },
                     highlight = {
                         enable = true,
                         additional_vim_regex_highlighting = false,
-                    }
+                    },
+                    textobjects = {
+                        select = {
+                            enable = true,
+                            lookahead = true,
+                            keymaps = {
+                                ["af"] = "@function.outer",
+                                ["if"] = "@function.inner",
+                                ["ac"] = "@class.outer",
+                                ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                                ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+                            },
+                            selection_modes = {
+                                ['@parameter.outer'] = 'v',
+                                ['@function.outer'] = 'V',
+                                ['@class.outer'] = '<c-v>',
+                            },
+                            include_surrounding_whitespace = true,
+                        },
+                    },
                 })
             end
         },
@@ -230,3 +250,7 @@ vim.keymap.set("n", "<leader9>", function() harpoonui.nav_file(9) end, { desc = 
 
 vim.keymap.set('n', '<c-n>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set('n', '<c-p>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+
+vim.keymap.set("n", "[c", function()
+    require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true })
