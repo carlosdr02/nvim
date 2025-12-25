@@ -50,27 +50,21 @@ require("lazy").setup({
     spec = {
         {
             "rose-pine/neovim", name = "rose-pine",
-            config = function()
-                --vim.cmd.colorscheme('rose-pine')
-            end
         },
         {
             "ellisonleao/gruvbox.nvim", priority = 1000,
-            config = function()
-                vim.cmd.colorscheme('gruvbox')
-            end
         },
         {
             "rebelot/kanagawa.nvim",
-            config = function()
-                --vim.cmd.colorscheme('kanagawa')
-            end
         },
         {
             "catppuccin/nvim", name = "catppuccin", priority = 1000,
-            config = function()
-                --vim.cmd.colorscheme('catppuccin')
-            end
+        },
+        {
+            "folke/tokyonight.nvim",
+            lazy = false,
+            priority = 1000,
+            opts = {}
         },
         {
             "mason-org/mason-lspconfig.nvim",
@@ -202,6 +196,8 @@ require("lazy").setup({
     checker = { enabled = false },
 })
 
+vim.cmd.colorscheme('catppuccin')
+
 local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = 'Find open buffers' })
@@ -257,13 +253,14 @@ vim.keymap.set("n", "<leader>ha", harpoonmark.add_file, { desc = "Add file to ha
 vim.keymap.set("n", "<leader>hm", harpoonui.toggle_quick_menu, { desc = "Toggle harpoon menu" })
 vim.keymap.set("n", "<leader>1", function() harpoonui.nav_file(1) end, { desc = "Go to harpoon file 1" })
 vim.keymap.set("n", "<leader>2", function() harpoonui.nav_file(2) end, { desc = "Go to harpoon file 2" })
-vim.keymap.set("n", "<leader3>", function() harpoonui.nav_file(3) end, { desc = "Go to harpoon file 3" })
-vim.keymap.set("n", "<leader4>", function() harpoonui.nav_file(4) end, { desc = "Go to harpoon file 4" })
-vim.keymap.set("n", "<leader5>", function() harpoonui.nav_file(5) end, { desc = "Go to harpoon file 5" })
-vim.keymap.set("n", "<leader6>", function() harpoonui.nav_file(6) end, { desc = "Go to harpoon file 6" })
-vim.keymap.set("n", "<leader7>", function() harpoonui.nav_file(7) end, { desc = "Go to harpoon file 7" })
-vim.keymap.set("n", "<leader8>", function() harpoonui.nav_file(8) end, { desc = "Go to harpoon file 8" })
-vim.keymap.set("n", "<leader9>", function() harpoonui.nav_file(9) end, { desc = "Go to harpoon file 9" })
+vim.keymap.set("n", "<leader>3", function() harpoonui.nav_file(3) end, { desc = "Go to harpoon file 3" })
+vim.keymap.set("n", "<leader>4", function() harpoonui.nav_file(4) end, { desc = "Go to harpoon file 4" })
+vim.keymap.set("n", "<leader>5", function() harpoonui.nav_file(5) end, { desc = "Go to harpoon file 5" })
+vim.keymap.set("n", "<leader>6", function() harpoonui.nav_file(6) end, { desc = "Go to harpoon file 6" })
+vim.keymap.set("n", "<leader>7", function() harpoonui.nav_file(7) end, { desc = "Go to harpoon file 7" })
+vim.keymap.set("n", "<leader>8", function() harpoonui.nav_file(8) end, { desc = "Go to harpoon file 8" })
+vim.keymap.set("n", "<leader>9", function() harpoonui.nav_file(9) end, { desc = "Go to harpoon file 9" })
+vim.keymap.set("n", "<leader>0", function() harpoonui.nav_file(10) end, { desc = "Go to harpoon file 10" })
 
 vim.keymap.set('n', '<c-n>', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to next diagnostic" })
 vim.keymap.set('n', '<c-p>', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic" })
