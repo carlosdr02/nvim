@@ -113,9 +113,16 @@ require("lazy").setup({
             "ibhagwan/fzf-lua",
             dependencies = { "nvim-tree/nvim-web-devicons" },
             opts = {
+                fzf_opts   = {
+                    ["--cycle"] = true
+                },
                 keymap = {
                     fzf = {
                         ["ctrl-q"] = "select-all+accept",
+                    },
+                    builtin = {
+                        ["<C-d>"] = "preview-page-down",
+                        ["<C-u>"] = "preview-page-up"
                     },
                 }
             }
@@ -196,7 +203,7 @@ require("lazy").setup({
     checker = { enabled = false },
 })
 
-vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('tokyonight-night')
 
 local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
