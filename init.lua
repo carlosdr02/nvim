@@ -25,3 +25,11 @@ vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
+
+-- move lines of code
+vim.keymap.set('n', '<a-j>', ':m .+1<cr>==', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('n', '<a-k>', ':m .-2<cr>==', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cursor down", silent = true })
+vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
+vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
+vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
