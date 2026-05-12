@@ -121,8 +121,8 @@ require("lazy").setup({
                         ["ctrl-q"] = "select-all+accept",
                     },
                     builtin = {
-                        ["<C-d>"] = "preview-page-down",
-                        ["<C-u>"] = "preview-page-up"
+                        ["<C-j>"] = "preview-page-down",
+                        ["<C-k>"] = "preview-page-up"
                     },
                 }
             }
@@ -203,7 +203,7 @@ require("lazy").setup({
     checker = { enabled = false },
 })
 
-vim.cmd.colorscheme('tokyonight-night')
+vim.cmd.colorscheme('catppuccin')
 
 local fzf = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
@@ -215,6 +215,7 @@ vim.keymap.set('n', '<leader>lr', fzf.lsp_references, { desc = 'LSP references' 
 vim.keymap.set('n', '<leader>lg', fzf.lsp_definitions, { desc = 'LSP definitions' })
 vim.keymap.set('n', '<leader>lG', fzf.lsp_declarations, { desc = 'LSP declarations' })
 vim.keymap.set('n', '<leader>lt', fzf.lsp_typedefs, { desc = 'LSP type definitions' })
+vim.keymap.set('n', '<leader>li', fzf.lsp_implementations, { desc = 'LSP implementations' })
 vim.keymap.set('n', '<leader>lsd', fzf.lsp_document_symbols, { desc = 'LSP symbols (document)' })
 vim.keymap.set('n', '<leader>lsw', fzf.lsp_workspace_symbols, { desc = 'LSP symbols (workspace)' })
 vim.keymap.set('n', '<leader>lci', fzf.lsp_incoming_calls, { desc = 'LSP calls (incoming)' })
@@ -272,6 +273,7 @@ vim.keymap.set("n", "<leader>0", function() harpoonui.nav_file(10) end, { desc =
 vim.keymap.set('n', '<c-n>', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to next diagnostic" })
 vim.keymap.set('n', '<c-p>', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float, { desc = "Open diagnostic window" })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 local treesittercontext = require('treesitter-context')
 vim.keymap.set("n", "[c", function() treesittercontext.go_to_context(vim.v.count1) end, { desc = "Go to context" })
