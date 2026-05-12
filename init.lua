@@ -1,35 +1,46 @@
 -- settings / options
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
 vim.opt.signcolumn = 'no'
-vim.opt.shiftround = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.clipboard = 'unnamedplus'
-vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.showmode = false
-vim.opt.guicursor = ""
+vim.opt.guicursor = ''
 
--- window navigation
-vim.keymap.set('n', '<c-h>', '<c-w>h')
-vim.keymap.set('n', '<c-j>', '<c-w>j')
-vim.keymap.set('n', '<c-k>', '<c-w>k')
-vim.keymap.set('n', '<c-l>', '<c-w>l')
+-- plugins
+vim.pack.add({
+    -- colorschemes
+    { src = 'https://github.com/rebelot/kanagawa.nvim' },
 
--- move lines of code
-vim.keymap.set('n', '<a-j>', ':m .+1<cr>==', { desc = "Move line under cursor down", silent = true })
-vim.keymap.set('n', '<a-k>', ':m .-2<cr>==', { desc = "Move line under cursor up", silent = true })
-vim.keymap.set('i', '<a-j>', '<esc>:m .+1<cr>==gi', { desc = "Move line under cursor down", silent = true })
-vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', { desc = "Move line under cursor up", silent = true })
-vim.keymap.set('v', '<a-j>', ':m \'>+1<cr>gv=gv', { desc = "Move selected lines down", silent = true })
-vim.keymap.set('v', '<a-k>', ':m \'<-2<cr>gv=gv', { desc = "Move selected lines up", silent = true })
+    -- lsp config and mason
+    { src = 'https://github.com/mason-org/mason.nvim' },
+    { src = 'https://github.com/neovim/nvim-lspconfig' },
+    { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+
+    -- mini.nvim
+    { src = 'https://github.com/nvim-mini/mini.nvim', version = 'stable' },
+
+    -- oil.nvim
+    { src = 'https://github.com/stevearc/oil.nvim' }
+})
+
+-- colorscheme
+vim.cmd.colorscheme('kanagawa')
+
+-- mason config
+require('mason').setup()
+require('mason-lspconfig').setup {
+    ensure_installed = { 'clangd' },
+}
+
+-- mini.nvim config
+require('mini.move').setup()
+require('mini.pairs').setup()
+require('mini.comment').setup()
+require('mini.icons').setup() -- required for oil.nvim
+require('mini.basics').setup {
+    mappings = {
+        windows = true
+    }
+}
+
+-- oil.nvim config
+require('oil').setup()
+
+-- keymaps
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
