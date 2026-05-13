@@ -1,23 +1,20 @@
--- SETTINGS / OPTIONS
+-- SETTINGS
 vim.opt.signcolumn = 'no'
 vim.opt.guicursor = ''
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 12
 vim.opt.clipboard = 'unnamedplus'
 
-
-
-
 -- PLUGINS
 vim.pack.add({
     -- deps
-    { src = 'https://github.com/rafamadriz/friendly-snippets' }, -- required by blink.cmp
-    { src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- required by fzf-lua and lualine
-    { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- required by harpoon
+    { src = 'https://github.com/rafamadriz/friendly-snippets' },
+    { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+    { src = 'https://github.com/nvim-lua/plenary.nvim' },
 
     -- colorschemes
     { src = 'https://github.com/rebelot/kanagawa.nvim' },
-    { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
+    { src = 'https://github.com/ellisonleao/gruvbox.nvim' },
     { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 
     -- lsp config and mason
@@ -25,54 +22,34 @@ vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 
-    -- mini.nvim
+    -- others
     { src = 'https://github.com/nvim-mini/mini.nvim', version = 'stable' },
-
-    -- oil.nvim
     { src = 'https://github.com/stevearc/oil.nvim' },
-
-    -- blink.cmp
     { src = 'https://github.com/saghen/blink.cmp', version = 'v1' },
-
-    -- fzf-lua
     { src = 'https://github.com/ibhagwan/fzf-lua' },
-
-    -- lualine
     { src = 'https://github.com/nvim-lualine/lualine.nvim' },
-
-    -- fugitive
     { src = 'https://github.com/tpope/vim-fugitive' },
-
-    -- harpoon
     { src = 'https://github.com/theprimeagen/harpoon' },
-
-    -- nvim-autopairs. mini.pairs doesn't quite cut it
-    { src = 'https://github.com/windwp/nvim-autopairs' }
+    { src = 'https://github.com/windwp/nvim-autopairs' },
 })
 
-
-
-
-
 -- PLUGINS CONFIG
-
--- mason config
 require('mason').setup()
 require('mason-lspconfig').setup {
     ensure_installed = { 'clangd', 'ts_ls', 'pyright' },
 }
 
--- mini.nvim config
+
 require('mini.move').setup()
 require('mini.comment').setup()
-require('mini.icons').setup() -- required for oil.nvim
+require('mini.icons').setup()
 require('mini.basics').setup {
     mappings = {
         windows = true
     }
 }
 
--- fzf-lua config
+
 local fzf = require('fzf-lua')
 fzf.setup {
     fzf_opts   = {
@@ -84,7 +61,7 @@ fzf.setup {
     },
 }
 
--- lualine config
+
 require('lualine').setup {
     sections = {
         lualine_c = {
@@ -96,34 +73,23 @@ require('lualine').setup {
     }
 }
 
--- blink.cmp config
+
 require('blink.cmp').setup {
     signature = { enabled = true }
 }
 
--- others
+
 require('oil').setup()
-require("rose-pine").setup()
 require("nvim-autopairs").setup()
 
-
-
-
 -- COLORSCHEME
-vim.cmd.colorscheme('catppuccin')
-
+vim.cmd.colorscheme('gruvbox')
 vim.diagnostic.config({ virtual_text = true })
 
-
-
-
-
 -- KEYMAPS
-
--- oil.nvim
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
--- fzf-lua
+
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = 'Find open buffers' })
 vim.keymap.set('n', '<leader>fg', fzf.live_grep_native, { desc = 'Live grep' })
@@ -157,7 +123,7 @@ vim.keymap.set('n', '<leader>mcs', fzf.colorschemes, { desc = 'Misc colorschemes
 vim.keymap.set('n', '<leader>mcc', fzf.commands, { desc = 'Misc neovim commands' })
 vim.keymap.set('n', '<leader>mch', fzf.command_history, { desc = 'Misc command history' })
 
--- harpoon
+
 local hmark = require('harpoon.mark')
 local hui = require('harpoon.ui')
 vim.keymap.set("n", "<leader>ha", hmark.add_file, { desc = "Add file to harpoon" })
@@ -173,7 +139,7 @@ vim.keymap.set("n", "<leader>8", function() hui.nav_file(8) end, { desc = "Go to
 vim.keymap.set("n", "<leader>9", function() hui.nav_file(9) end, { desc = "Go to harpoon file 9" })
 vim.keymap.set("n", "<leader>0", function() hui.nav_file(10) end, { desc = "Go to harpoon file 10" })
 
--- some LSP ones
+
 vim.keymap.set('n', '<c-n>', function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to next diagnostic" })
 vim.keymap.set('n', '<c-p>', function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float, { desc = "Open diagnostic window" })
