@@ -46,6 +46,10 @@
       "src": "https://github.com/nvim-mini/mini.nvim",
       "version": "'stable'"
     },
+    "monokai-pro.nvim": {
+      "rev": "2eb6fe008dcabb5c2d37978fe34f36bb318a2a96",
+      "src": "https://github.com/loctvl842/monokai-pro.nvim"
+    },
     "nvim-autopairs": {
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs"
