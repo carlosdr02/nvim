@@ -3,14 +3,22 @@ vim.opt.signcolumn = 'no'
 vim.opt.guicursor = ''
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 12
+vim.opt.clipboard = 'unnamedplus'
 
 
 
 
 -- PLUGINS
 vim.pack.add({
+    -- deps
+    { src = 'https://github.com/rafamadriz/friendly-snippets' }, -- required by blink.cmp
+    { src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- required by fzf-lua and lualine
+    { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- required by harpoon
+
     -- colorschemes
     { src = 'https://github.com/rebelot/kanagawa.nvim' },
+    { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
+    { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 
     -- lsp config and mason
     { src = 'https://github.com/mason-org/mason.nvim' },
@@ -24,21 +32,22 @@ vim.pack.add({
     { src = 'https://github.com/stevearc/oil.nvim' },
 
     -- blink.cmp
-    { src = 'https://github.com/rafamadriz/friendly-snippets' },
     { src = 'https://github.com/saghen/blink.cmp', version = 'v1' },
 
     -- fzf-lua
     { src = 'https://github.com/ibhagwan/fzf-lua' },
 
     -- lualine
-    { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
     { src = 'https://github.com/nvim-lualine/lualine.nvim' },
 
     -- fugitive
     { src = 'https://github.com/tpope/vim-fugitive' },
 
-    { src = 'https://github.com/nvim-lua/plenary.nvim' },
+    -- harpoon
     { src = 'https://github.com/theprimeagen/harpoon' },
+
+    -- nvim-autopairs. mini.pairs doesn't quite cut it
+    { src = 'https://github.com/windwp/nvim-autopairs' }
 })
 
 
@@ -55,7 +64,6 @@ require('mason-lspconfig').setup {
 
 -- mini.nvim config
 require('mini.move').setup()
-require('mini.pairs').setup()
 require('mini.comment').setup()
 require('mini.icons').setup() -- required for oil.nvim
 require('mini.basics').setup {
@@ -70,7 +78,7 @@ fzf.setup {
     fzf_opts   = {
         ["--cycle"] = true
     },
-    builtin = {
+    builtin = { -- TODO: see if there's a way to use C-d and C-u
         ["<C-j>"] = "preview-page-down",
         ["<C-k>"] = "preview-page-up"
     },
@@ -88,15 +96,23 @@ require('lualine').setup {
     }
 }
 
+-- blink.cmp config
+require('blink.cmp').setup {
+    signature = { enabled = true }
+}
+
 -- others
 require('oil').setup()
-require('blink.cmp').setup()
+require("rose-pine").setup()
+require("nvim-autopairs").setup()
 
 
 
 
 -- COLORSCHEME
-vim.cmd.colorscheme('kanagawa')
+vim.cmd.colorscheme('catppuccin')
+
+vim.diagnostic.config({ virtual_text = true })
 
 
 
