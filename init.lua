@@ -11,6 +11,8 @@ vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'no'
+vim.opt.scrolloff = 12
+vim.opt.clipboard = 'unnamedplus'
 
 vim.pack.add({
     -- colorschemes
@@ -49,10 +51,16 @@ vim.pack.add({
     -- mini.nvim
     { src = 'https://github.com/nvim-mini/mini.move' },
     { src = 'https://github.com/nvim-mini/mini.basics' },
+
+    -- quicker.nvim
+    { src = 'https://github.com/stevearc/quicker.nvim' },
 })
 
 vim.cmd.colorscheme('gruvbox')
 vim.diagnostic.config({ virtual_text = true })
+vim.lsp.config('clangd', {
+    cmd = { 'clangd', '--header-insertion=never' }
+})
 
 require('mini.basics').setup {
     options = {
@@ -66,6 +74,7 @@ require('mini.basics').setup {
 require('mini.icons').setup()
 require('mini.move').setup()
 require('oil').setup()
+require('quicker').setup()
 require('nvim-autopairs').setup()
 require('lualine').setup {
     sections = {
@@ -85,6 +94,11 @@ fzf.setup {
     builtin = { -- TODO: see if there's a way to use C-d and C-u
         ["<C-j>"] = "preview-page-down",
         ["<C-k>"] = "preview-page-up"
+    },
+    keymap = {
+        fzf = {
+            ["ctrl-q"] = "select-all+accept",
+        }
     },
 }
 require("mason").setup()
