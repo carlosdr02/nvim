@@ -17,6 +17,9 @@ vim.opt.clipboard = 'unnamedplus'
 vim.pack.add({
     -- colorschemes
     { src = 'https://github.com/ellisonleao/gruvbox.nvim' },
+    { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+    { src = 'https://github.com/rebelot/kanagawa.nvim' },
+    { src = 'https://github.com/vague-theme/vague.nvim' },
 
     -- oil.nvim
     { src = 'https://github.com/nvim-mini/mini.icons' },
@@ -52,14 +55,13 @@ vim.pack.add({
     { src = 'https://github.com/nvim-mini/mini.move' },
     { src = 'https://github.com/nvim-mini/mini.basics' },
 
-    -- quicker.nvim
-    { src = 'https://github.com/stevearc/quicker.nvim' },
-})
-
-vim.cmd.colorscheme('gruvbox')
-vim.diagnostic.config({ virtual_text = true })
-vim.lsp.config('clangd', {
-    cmd = { 'clangd', '--header-insertion=never' }
+    -- nvim-treesitter
+    {
+        src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+        data = {
+            run = function(_) vim.cmd 'TSUpdate' end,
+        },
+    },
 })
 
 require('mini.basics').setup {
@@ -74,7 +76,6 @@ require('mini.basics').setup {
 require('mini.icons').setup()
 require('mini.move').setup()
 require('oil').setup()
-require('quicker').setup()
 require('nvim-autopairs').setup()
 require('lualine').setup {
     sections = {
@@ -108,6 +109,19 @@ require("mason-lspconfig").setup {
 require('blink.cmp').setup {
     signature = { enabled = true }
 }
+require('nvim-treesitter').install { 'cpp', 'typescript', 'python' }
+
+vim.cmd.colorscheme('vague')
+vim.diagnostic.config({ virtual_text = true })
+vim.lsp.config('clangd', {
+    cmd = { 'clangd', '--header-insertion=never' }
+})
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = '*',
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
+})
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
@@ -168,3 +182,69 @@ vim.keymap.set('n', '<leader>j', vim.diagnostic.open_float, { desc = "Open diagn
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 vim.keymap.set("n", "<leader>s", "<CMD>LspClangdSwitchSourceHeader<CR>", { desc = "Switch between source and header files in C & C++" })
+
+vim.keymap.set("n", "<leader>n", "<CMD>noh<CR>", { desc = "Clear search highlight" })
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "Write buffer" })
+vim.keymap.set("n", "<leader>q", "<CMD>q<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>Q", "<CMD>q!<CR>", { desc = "Force quit" })
+vim.keymap.set("n", "<leader>o", "<CMD>on<CR>", { desc = "Close all windows but current" })
+
+vim.keymap.set("i", "jk", "<esc>")
+vim.keymap.set("i", "jK", "<esc>")
+vim.keymap.set("i", "Jk", "<esc>")
+vim.keymap.set("i", "JK", "<esc>")
+
+vim.keymap.set("i", "kj", "<esc>")
+vim.keymap.set("i", "kJ", "<esc>")
+vim.keymap.set("i", "Kj", "<esc>")
+vim.keymap.set("i", "KJ", "<esc>")
+
+-- make diagnostic virtual texts have the same background as cursor line
+local diagnostic_groups = {
+    "DiagnosticVirtualTextError",
+    "DiagnosticVirtualTextWarn",
+    "DiagnosticVirtualTextInfo",
+    "DiagnosticVirtualTextHint",
+    "DiagnosticVirtualTextOk",
+}
+
+local function apply_diagnostic_bg()
+    local cursorline_hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
+    local bg = cursorline_hl.bg
+
+    for _, group in ipairs(diagnostic_groups) do
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        if next(hl) ~= nil and bg ~= nil then
+            hl.bg = bg
+            vim.api.nvim_set_hl(0, group, hl)
+        end
+    end
+end
+
+apply_diagnostic_bg()
+
+local colorscheme_highlights = {
+    gruvbox = {
+        { from = 'Operator',   to = 'GruvboxFg1' },
+        { from = 'Delimiter',  to = 'GruvboxFg1' },
+        { from = 'Identifier', to = 'GruvboxFg1' },
+    },
+}
+
+local function apply_colorscheme_highlights()
+    local scheme = vim.g.colors_name
+    local links = colorscheme_highlights[scheme]
+    if not links then return end
+    for _, link in ipairs(links) do
+        vim.api.nvim_set_hl(0, link.from, { link = link.to })
+    end
+end
+
+apply_colorscheme_highlights()
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        apply_diagnostic_bg()
+        apply_colorscheme_highlights()
+    end,
+})
