@@ -218,30 +218,8 @@ end
 
 apply_diagnostic_bg()
 
-local colorscheme_highlights = {
-    gruvbox = {
-        { from = 'Operator',   to = 'GruvboxFg1' },
-        { from = 'Delimiter',  to = 'GruvboxFg1' },
-        { from = 'Identifier', to = 'GruvboxFg1' },
-    },
-}
-
-local function apply_colorscheme_highlights()
-    local scheme = vim.g.colors_name
-    local links = colorscheme_highlights[scheme]
-    if not links then return end
-    for _, link in ipairs(links) do
-        vim.api.nvim_set_hl(0, link.from, { link = link.to })
-    end
-end
-
-apply_colorscheme_highlights()
-
 vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-        apply_diagnostic_bg()
-        apply_colorscheme_highlights()
-    end,
+    callback = apply_diagnostic_bg,
 })
 
 -- VUE SETUP (kill me)
